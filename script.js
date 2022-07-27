@@ -1,12 +1,21 @@
 // Write your JavaScript code here!
 function init() {
+   const pilotName = document.querySelector("input[name=pilotName]");
+   const copilotName = document.querySelector("input[name=copilotName]");
+   const fuelLevel = document.querySelector("input[name=fuelLevel]");
+   const cargoMass = document.querySelector("input[name=cargoMass]");
+
    const launchForm = document.getElementById("launchForm");
+   let itemStatus = document.getElementById("itemStatus");
+   let launchStatus = document.getElementById("launchStatus");
+
+   let pilotStatus = document.getElementById("pilotStatus");
+   let copilotStatus = document.getElementById("copilotStatus");
+   let fuelStatus = document.getElementById("fuelStatus");
+   let cargoStatus = document.getElementById("cargoStatus");
 
    launchForm.addEventListener("submit", function(event){
-      const pilotName = launchForm.querySelector("input[name=pilotName]");
-      const copilotName = launchForm.querySelector("input[name=copilotName]");
-      const fuelLevel = launchForm.querySelector("input[name=fuelLevel]");
-      const cargoMass = launchForm.querySelector("input[name=cargoMass]");
+      
 
       let empty = "";
 
@@ -18,6 +27,33 @@ function init() {
          event.preventDefault();
       }
 
+      itemStatus.style.visibility = "visible";
+
+      pilotStatus.innerHTML = `<b>Pilot <em>${pilotName.value}</b></em> is ready for launch`;
+      copilotStatus.innerHTML = `<b>Copilot <em>${copilotName.value}</b></em> is ready for launch`;
+
+      let shuttleReady = true;
+
+      if (Number(fuelLevel.value) < 10000) {
+         fuelStatus.innerHTML = "Fuel level too low";
+
+         shuttleReady = false;
+      } else {
+         fuelStatus.innerHTML = "Fuel level check passed";
+      }
+
+      if (Number(cargoMass.value) > 10000) {
+         cargoStatus.innerHTML = "Cargo mass too high for launch";
+
+         shuttleReady = false;
+      } else {
+         cargoStatus.innerHTML = "Cargo mass check passed";
+      }
+
+      launchStatus.style.color = shuttleReady ? "green" : "red";
+      launchStatus.innerHTML = shuttleReady ? "Shuttle is ready for launch" : "Shuttle not ready for launch";
+
+      event.preventDefault();
    });
 }
 
