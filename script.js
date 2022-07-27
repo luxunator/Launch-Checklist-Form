@@ -1,4 +1,4 @@
-function displayMission(element) {
+function displayDestination(element) {
    const fetchPromise = fetch("https://handlers.education.launchcode.org/static/planets.json");
 
    fetchPromise
@@ -10,7 +10,7 @@ function displayMission(element) {
 
                let index = Math.floor(Math.random() * json.length);
                
-               element.innerHTML +=`
+               element.innerHTML = `
                   <h2>Mission Destination</h2>
                   <ul>
                      <li>Name: ${json[index].name}</li>
@@ -20,7 +20,13 @@ function displayMission(element) {
                      <li>Number of Moons: ${json[index].moons}</li>
                   </ul>
                   <img src="${json[index].image}">
+                  <br>
+                  <button id="missionRefresh">Refresh Destination</button>
                `;
+
+               missionRefresh.addEventListener("click", function(){
+                  displayDestination(element)
+               });
             });
       });
 }
@@ -33,7 +39,7 @@ function formErrorAlert(event, err) {
 function init() {
 
    let missionTarget = document.getElementById("missionTarget");
-   displayMission(missionTarget);
+   displayDestination(missionTarget);
 
    let launchForm = document.getElementById("launchForm");
 
