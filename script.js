@@ -14,6 +14,30 @@ function init() {
    let fuelStatus = document.getElementById("fuelStatus");
    let cargoStatus = document.getElementById("cargoStatus");
 
+   const fetchPromise = fetch("https://handlers.education.launchcode.org/static/planets.json");
+
+   fetchPromise.then( function(response) {
+      const jsonPromise = response.json();
+
+      jsonPromise.then( function(json) {
+         const missionTarget = document.getElementById("missionTarget");
+
+         let index = Math.floor(Math.random() * json.length);
+
+         missionTarget.innerHTML +=`
+            <h2>Mission Destination</h2>
+            <ul>
+               <li>Name: ${json[index].name}</li>
+               <li>Diameter: ${json[index].diameter}</li>
+               <li>Star: ${json[index].star}</li>
+               <li>Distance from Earth: ${json[index].distance}</li>
+               <li>Number of Moons: ${json[index].moons}</li>
+            </ul>
+            <img src="${json[index].image}">
+         `;
+      });
+   });
+
    launchForm.addEventListener("submit", function(event){
       
 
