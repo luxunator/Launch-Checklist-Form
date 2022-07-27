@@ -13,6 +13,9 @@ function init() {
       if (pilotName.value === empty || copilotName.value ===  empty || fuelLevel.value === empty || cargoMass.value === empty) {
          alert("All fields are required!");
          event.preventDefault();
+      } else if (isNaN(Number(fuelLevel.value)) || isNaN(Number(cargoMass.value))) {
+         alert("Fuel Level & Cargo Mass need to be numbers!");
+         event.preventDefault();
       }
 
    });
