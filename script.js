@@ -24,6 +24,8 @@ function displayDestination(element) {
                   <button id="missionRefresh">Refresh Destination</button>
                `;
 
+               let missionRefresh = document.getElementById("missionRefresh");
+
                missionRefresh.addEventListener("click", function(){
                   displayDestination(element)
                });
