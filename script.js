@@ -1,4 +1,24 @@
 // Write your JavaScript code here!
+function init() {
+   const launchForm = document.getElementById("launchForm");
+
+   launchForm.addEventListener("submit", function(event){
+      const pilotName = launchForm.querySelector("input[name=pilotName]");
+      const copilotName = launchForm.querySelector("input[name=copilotName]");
+      const fuelLevel = launchForm.querySelector("input[name=fuelLevel]");
+      const cargoMass = launchForm.querySelector("input[name=cargoMass]");
+
+      let empty = "";
+
+      if (pilotName.value === empty || copilotName.value ===  empty || fuelLevel.value === empty || cargoMass.value === empty) {
+         alert("All fields are required!");
+         event.preventDefault();
+      }
+
+   });
+}
+
+window.addEventListener("load", init);
 
 /* This block of code shows how to format the HTML once you fetch some planetary JSON!
 <h2>Mission Destination</h2>
