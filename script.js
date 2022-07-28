@@ -77,10 +77,15 @@ function init() {
 
       // Validate input values
       let hasEmptyValues = !(pilotName) || !(copilotName) || !(fuelLevel) || !(cargoMass);
+      let hasAlphabetical = !/[^a-zA-Z]/.test(pilotName) && !/[^a-zA-Z]/.test(copilotName);
       let hasNaNMeasurements = isNaN(fuelLevelNum) || isNaN(cargoMassNum);
 
       if (hasEmptyValues) {
          formErrorAlert(event, "All fields are required!");
+
+         return;
+      } else if (!hasAlphabetical) {
+         formErrorAlert(event, "Pilot and Copilot names need to be alphabetical!");
 
          return;
       } else if (hasNaNMeasurements) {
