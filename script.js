@@ -95,11 +95,11 @@ function init() {
 
       pilotStatus.innerHTML = `<b>Pilot <em>${pilotName}</b></em> is ready for launch`;
       copilotStatus.innerHTML = `<b>Copilot <em>${copilotName}</b></em> is ready for launch`;
-      fuelStatus.innerHTML = fuelLevelNum > 10000 ? "Fuel level check passed" : "Fuel level too low";
-      cargoStatus.innerHTML = cargoMassNum < 10000 ? "Cargo mass check passed" : "Cargo mass too high for launch";
+      fuelStatus.innerHTML = fuelLevelNum >= 10000 ? "Fuel level check passed" : "Fuel level too low";
+      cargoStatus.innerHTML = cargoMassNum <= 10000 ? "Cargo mass check passed" : "Cargo mass too high for launch";
 
 
-      let shuttleReady = (fuelLevelNum > 10000) && (cargoMassNum < 10000);
+      let shuttleReady = (fuelLevelNum >= 10000) && (cargoMassNum <= 10000);
 
       launchStatus.style.color = shuttleReady ? "green" : "red";
       launchStatus.innerHTML = shuttleReady ? "Shuttle is ready for launch" : "Shuttle not ready for launch";
