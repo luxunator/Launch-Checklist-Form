@@ -86,19 +86,10 @@ function init() {
       let hasAlphabetical = !/[^a-zA-Z]/.test(pilotName) && !/[^a-zA-Z]/.test(copilotName);
       let hasNaNMeasurements = isNaN(fuelLevelNum) || isNaN(cargoMassNum);
 
-      if (hasEmptyValues) {
-         formErrorAction("All fields are required!", itemStatus, launchStatus);
-
-         return;
-      } else if (!hasAlphabetical) {
-         formErrorAction("Pilot and Copilot names need to be alphabetical!", itemStatus, launchStatus);
-
-         return;
-      } else if (hasNaNMeasurements) {
-         formErrorAction("Fuel Level & Cargo Mass need to be numbers!", itemStatus, launchStatus);
-         
-         return;
-      }
+      // (TO MATT) Not necessarily good practice for one line guard clauses but included as I learned about void
+      if (hasEmptyValues) return void formErrorAction("All fields are required!", itemStatus, launchStatus);
+      if (!hasAlphabetical) return void formErrorAction("Pilot and Copilot names need to be alphabetical!", itemStatus, launchStatus);
+      if (hasNaNMeasurements) return void formErrorAction("Fuel Level & Cargo Mass need to be numbers!", itemStatus, launchStatus);
 
       // Display shuttle launch status
       itemStatus.style.visibility = "visible";
@@ -108,13 +99,10 @@ function init() {
       fuelStatus.innerHTML = fuelLevelNum >= 10000 ? "Fuel level check passed" : "Fuel level too low";
       cargoStatus.innerHTML = cargoMassNum <= 10000 ? "Cargo mass check passed" : "Cargo mass too high for launch";
 
-
       let shuttleReady = (fuelLevelNum >= 10000) && (cargoMassNum <= 10000);
 
       launchStatus.style.color = shuttleReady ? "green" : "red";
       launchStatus.innerHTML = shuttleReady ? "Shuttle is ready for launch" : "Shuttle not ready for launch";
-
-      
    });
 }
 
