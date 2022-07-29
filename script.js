@@ -41,9 +41,12 @@ function displayDestination(element) {
 }
 
 // Show form error and prevent submission
-function formErrorAlert(event, err) {
+function formErrorAction(err,  itemStatus) {
+   itemStatus.style.visibility = "hidden";
+   launchStatus.style.color = "black";
+   launchStatus.innerHTML = "Awaiting Information Before Launch";
+   
    alert(err);
-   event.preventDefault();
 }
 
 // Execute main function on load
@@ -57,6 +60,9 @@ function init() {
    let launchForm = document.getElementById("launchForm");
 
    launchForm.addEventListener("submit", function(event){
+      
+      // Prevent form submission
+      event.preventDefault();
       
       // Select inputs fields and outputs
       let pilotName = document.querySelector("input[name=pilotName]").value;
@@ -81,19 +87,18 @@ function init() {
       let hasNaNMeasurements = isNaN(fuelLevelNum) || isNaN(cargoMassNum);
 
       if (hasEmptyValues) {
-         formErrorAlert(event, "All fields are required!");
+         formErrorAction("All fields are required!", itemStatus, launchStatus);
 
          return;
       } else if (!hasAlphabetical) {
-         formErrorAlert(event, "Pilot and Copilot names need to be alphabetical!");
+         formErrorAction("Pilot and Copilot names need to be alphabetical!", itemStatus, launchStatus);
 
          return;
       } else if (hasNaNMeasurements) {
-         formErrorAlert(event, "Fuel Level & Cargo Mass need to be numbers!");
+         formErrorAction("Fuel Level & Cargo Mass need to be numbers!", itemStatus, launchStatus);
          
          return;
       }
-
 
       // Display shuttle launch status
       itemStatus.style.visibility = "visible";
@@ -109,8 +114,7 @@ function init() {
       launchStatus.style.color = shuttleReady ? "green" : "red";
       launchStatus.innerHTML = shuttleReady ? "Shuttle is ready for launch" : "Shuttle not ready for launch";
 
-      // Prevent default (can be removed to allow form submission)
-      event.preventDefault();
+      
    });
 }
 
