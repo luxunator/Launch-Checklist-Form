@@ -41,7 +41,7 @@ function displayDestination(element) {
 }
 
 // Show form error and prevent submission
-function formErrorAction(err,  itemStatus) {
+function formErrorAction(err,  itemStatus, launchStatus) {
    itemStatus.style.visibility = "hidden";
    launchStatus.style.color = "black";
    launchStatus.innerHTML = "Awaiting Information Before Launch";
